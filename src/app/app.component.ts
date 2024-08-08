@@ -67,7 +67,6 @@ export class AppComponent implements OnInit {
 
   saveAluno() {
     debugger;
-    // https://youtu.be/VVHj6WjcWrA?t=2442
     const isLocalPresent = localStorage.getItem("sessaoEmAndamento");
     if (isLocalPresent != null) {
       const oldArray = JSON.parse(isLocalPresent);
