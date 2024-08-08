@@ -1,0 +1,111 @@
+<div class="container">
+  <div class="row pt-3">
+    <div class="col-6">
+      <h4>Portal do Estudante</h4>
+    </div>
+    <div class="col-6 text-end">
+      <button class="btn btn-outline-success" (click)="openModel()">Adicionar</button>
+    </div>
+  </div>
+  @if(alunoList.length !== 0) {
+  <div class="row">
+    @for (item of alunoList; track $index) {
+    <div class="col-3">
+      <div class="card">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-6">
+              {{item.nome}}
+            </div>
+            <div class="col-6 text-end">
+              {{item.celular}}
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <p>{{item.cidade}} / {{item.uf}} / {{item.cep}}</p>
+          <p>{{item.endereco}}</p>
+        </div>
+        <div class="card-footer text-center">
+          <div class="row">
+            <div class="col-6">
+              <small>{{item.email}}</small>
+            </div>
+            <div class="col-5">
+              <button class="btn btn-sm btn-primary" (click)="onEdit(item)">Editar</button>
+              <button class="btn btn-sm btn-danger" (click)="onDelete(item)">Apagar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+  } @else {
+  <div class="row">
+    <div class="col-12 p-4 text-center">
+      <p>Nada a exibir</p>
+    </div>
+  </div>
+  }
+
+</div>
+
+
+<div class="modal" id="myModal" #myModal>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Cadastrar Novo Aluno</h4>
+        <button type="button" class="btn-close" (click)="closeModel()"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-8">
+            <label for="">Nome</label>
+            <input type="text" [(ngModel)]="alunoObj.nome" class="form-control-sm" placeholder="Nome">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <label for="">Celular</label>
+            <input type="text" [(ngModel)]="alunoObj.celular" class="form-control-sm" placeholder="Celular">
+          </div>
+          <div class="col-6">
+            <label for="">E-Mail</label>
+            <input type="text" [(ngModel)]="alunoObj.email" class="form-control-sm" placeholder="E-Mail">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-4">
+            <label for="">Cidade</label>
+            <input type="text" [(ngModel)]="alunoObj.cidade" class="form-control-sm" placeholder="Cidade">
+          </div>
+          <div class="col-4">
+            <label for="">UF</label>
+            <input type="text" [(ngModel)]="alunoObj.uf" class="form-control-sm" placeholder="UF">
+          </div>
+          <div class="col-4">
+            <label for="">Cep</label>
+            <input type="text" [(ngModel)]="alunoObj.cep" class="form-control-sm" placeholder="Cep">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <label for="">Endereço</label>
+            <textarea rows="3" [(ngModel)]="alunoObj.endereco" class="form-control-sm"
+              placeholder="Endereço"></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="closeModel()">Fechar</button>
+        @if (alunoObj.id == 0) {
+        <button type="button" class="btn btn-primary" (click)="saveAluno()">Salvar</button>
+        } @else {
+        <button type="button" class="btn btn-success" (click)="atualizaAluno()">Atualizar</button>
+        }
+      </div>
+    </div>
+  </div>
+</div>
